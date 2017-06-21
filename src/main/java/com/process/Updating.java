@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URISyntaxException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,7 +47,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			String uscomps=request.getParameter("uscomp");
 			//System.out.println(uhost+"Hello");
 			docBuilder = docFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse("F:\\JavaProgram\\Dashboard\\src\\main\\webapp\\roseindia.xml");
+			File input =new File( getServletContext().getResource("/roseindia.xml").toURI());
+			Document doc = docBuilder.parse(input);
 			//Node earth = doc.getFirstChild();//roseindia
 			//NamedNodeMap earthAttributes = earth.getAttributes();
 			//Attr galaxy = doc.createAttribute("galaxy");
@@ -122,9 +124,10 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			DOMSource source = new DOMSource(doc);
 			
 			
-			File folder = new File("F:\\JavaProgram\\Dashboard\\src\\main\\webapp");
-			StreamResult result = new StreamResult(new File(folder, "roseindia.xml"));
-			
+			//File folder = new File("F:\\JavaProgram\\Dashboard\\src\\main\\webapp");
+			File folder=new File(getServletContext().getResource("/roseindia.xml").toURI());
+			//StreamResult result = new StreamResult(new File(folder, "roseindia.xml"));
+			StreamResult result = new StreamResult(folder);
 		    //File outputFile = new File("roseindia.xml");
 		    //StreamResult result1 = new StreamResult(outputFile );
 		    // creating output stream
@@ -141,6 +144,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
