@@ -6,14 +6,14 @@
 <%@page import="java.io.*"
 %>
 <%
-  DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+  /*DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
   DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-  Document doc = docBuilder.parse("F:\\JavaProgram\\Dashboard\\src\\main\\webapp\\roseindia.xml");
+  Document doc = docBuilder.parse("F:\\JavaProgram\\Dashboard\\src\\main\\webapp\\roseindia.xml");*/
   
-			/*File input =new File( getServletContext().getResource("/roseindia.xml").toURI());
+			File input =new File( getServletContext().getResource("/roseindia.xml").toURI());
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db=dbf.newDocumentBuilder();
-			Document doc = db.parse(input);*/
+			Document doc = db.parse(input);
 		
 %>
 <%!
