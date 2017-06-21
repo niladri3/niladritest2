@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@page import="org.w3c.dom.*, javax.xml.parsers.*" %>
+<%@page import="org.w3c.dom.*, javax.xml.parsers.*"
+%>
+<%@page import="java.io.*"
+%>
 <%
-  DocumentBuilderFactory docFactory = 
-  DocumentBuilderFactory.newInstance();
-  DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-  Document doc = docBuilder.parse
-("F:\\JavaProgram\\Dashboard\\src\\main\\webapp\\roseindia.xml");
+  //DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+  //DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+  //Document doc = docBuilder.parse("F:\\JavaProgram\\Dashboard\\src\\main\\webapp\\roseindia.xml");
+  
+			File input =new File( getServletContext().getResource("/roseindia.xml").toURI());
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db=dbf.newDocumentBuilder();
+			Document doc = db.parse(input);
+		
 %>
 <%!
   public boolean isTextNode(Node n){

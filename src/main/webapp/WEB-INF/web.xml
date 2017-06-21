@@ -22,6 +22,12 @@
   	<description></description>
   	<servlet-class>com.process.DeleteDataProd</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>TestHello</servlet-name>
+  	<display-name>TestHello</display-name>
+  	<description></description>
+  	<servlet-class>com.process.TestHello</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Updating</servlet-name>
   	<url-pattern>/Updating</url-pattern>
@@ -33,5 +39,9 @@
   <servlet-mapping>
   	<servlet-name>DeleteDataProd</servlet-name>
   	<url-pattern>/DeleteDataProd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>TestHello</servlet-name>
+  	<url-pattern>/TestHello</url-pattern>
   </servlet-mapping>
 </web-app>
