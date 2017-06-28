@@ -1,14 +1,23 @@
 @CHARSET "ISO-8859-1";
+body {
+	background-color: #e8f3f8;
+}
+
+#inline{
+	display: inline-block;
+}
+
 h2{
 	text-align:center;
+	background-color: #2a8000;
 }
 th, td {
 	text-align: center;
 }
 
 input[type="submit"] {
-	width: 320px;
-	height: 45px;
+	width: 200px;
+	height: 30px;
 	border: 1px solid;
 	font-size: 14px;
 	font-weight: bold;

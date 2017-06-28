@@ -47,7 +47,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			String uscomps=request.getParameter("uscomp");
 			//System.out.println(uhost+"Hello");
 			docBuilder = docFactory.newDocumentBuilder();
-			File input =new File( getServletContext().getResource("/roseindia.xml").toURI());
+			File input =new File( getServletContext().getResource("/Prod.xml").toURI());
 			Document doc = docBuilder.parse(input);
 			//Node earth = doc.getFirstChild();//roseindia
 			//NamedNodeMap earthAttributes = earth.getAttributes();
@@ -125,7 +125,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			
 			
 			//File folder = new File("F:\\JavaProgram\\Dashboard\\src\\main\\webapp");
-			File folder=new File(getServletContext().getResource("/roseindia.xml").toURI());
+			File folder=new File(getServletContext().getResource("/Prod.xml").toURI());
 			//StreamResult result = new StreamResult(new File(folder, "roseindia.xml"));
 			StreamResult result = new StreamResult(folder);
 		    //File outputFile = new File("roseindia.xml");
@@ -161,9 +161,3 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	}
 
 }
-	
-	
-	
-	
-
-

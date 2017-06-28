@@ -31,14 +31,10 @@ import org.xml.sax.SAXException;
 
 
 
-public class TestHello extends HttpServlet {
+public class deleteNonProd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	Document document;
-    public TestHello() {
-        super();
-            }
-
     Document doc;
     String nNode,deleteValue;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,29 +42,20 @@ public class TestHello extends HttpServlet {
 		
 		PrintWriter out=response.getWriter();
 		try {
-			//File testf = new File( TestHello.class.getResource( "/roseindia.xml" ).toURI() );
-			File input =new File( getServletContext().getResource("/roseindia.xml").toURI());
+			
+			File input =new File( getServletContext().getResource("/nonProd.xml").toURI());
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db=dbf.newDocumentBuilder();
 			doc = db.parse(input);
 			deleteValue=request.getParameter("value");
 			System.out.println("checking the value"+deleteValue);
-			/*DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-			  DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-			 doc = docBuilder.parse("F:\\JavaProgram\\Dashboard\\src\\main\\webapp\\roseindia.xml");*/
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String value="5";
-		//Node newChild= document.getFirstChild();
-		//NodeList name=document.getElementsByTagName("employee")[0].childNodes[0].nodeValue;
 		out.println(doc.getDocumentElement().getNodeName()+"Hello");
 		NodeList nList = doc.getElementsByTagName("uURL");
 		out.println(nList.getLength());
@@ -88,44 +75,26 @@ public class TestHello extends HttpServlet {
 			}
 			out.println("<br>outside");
 			out.println("<br>nNode");
-			//Element Element=(Element)nNode;
-			//out.println("<br>");
-			//out.println(Element.getElementsByTagName("uhost").item(0).getTextContent());
-			//out.println("<br>");
-			//out.println(Element.removeChild(nNode)+"Done");
-			//out.println(Element.getElementsByTagName("uhost").item(0).getTextContent()+"  CHECK     ");
 		}
-		
-		/*Element Element=(Element)nList;
-		String element =Element.getElementsByTagName("uhost").item(3).getTextContent();
-		out.println(element);
-		//Element.getElementsByTagName("uhost").item(0).getTextContent()*/
 		
 		Transformer transformer;
 		try {
 			transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			DOMSource source = new DOMSource(doc);
-			//File folder = new File("F:\\JavaProgram\\Dashboard\\src\\main\\webapp");
-			//StreamResult result = new StreamResult(new File(folder, "roseindia.xml"));
-			//transformer.transform(source, result);
-			File folder=new File(getServletContext().getResource("/roseindia.xml").toURI());
+			File folder=new File(getServletContext().getResource("/nonProd.xml").toURI());
 			StreamResult result = new StreamResult(folder);
 			 transformer.transform(source, result);
 		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (TransformerFactoryConfigurationError e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("parsingxmlNonProd.jsp");
 	}
 
 	

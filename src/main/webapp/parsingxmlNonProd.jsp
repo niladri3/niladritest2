@@ -2,12 +2,22 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="org.w3c.dom.*, javax.xml.parsers.*" %>
+<%@page import="java.io.*"
+%>
 <%
-  DocumentBuilderFactory docFactory = 
+  /*DocumentBuilderFactory docFactory = 
   DocumentBuilderFactory.newInstance();
   DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
   Document doc = docBuilder.parse
-("F:\\JavaProgram\\Dashboard\\src\\main\\webapp\\nonProd.xml");
+("F:\\JavaProgram\\Dashboard\\src\\main\\webapp\\nonProd.xml"); */
+
+File input =new File( getServletContext().getResource("/nonProd.xml").toURI());
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+DocumentBuilder db=dbf.newDocumentBuilder();
+Document doc = db.parse(input);
+  
+  
+  
 %>
 <%!
   public boolean isTextNode(Node n){
@@ -19,22 +29,66 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Parsing of xml using DOM Parser</title>
+
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+
+
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	$('#Delete').click(function(){
+		var value1 = prompt("Please enter the password","Password");
+		if(value1=="nc51969"){
+		var value=prompt("Please enter the URL name  to delete","ex-1");
+		$.ajax({
+			
+			type:'Get',
+			 data:{value:value},
+			 url:'deleteNonProd',
+			 success:function(result){
+				 window.location.reload(true);
+			
+		}
+		
+	});
+		}
+		else{
+			
+			alert("Please enter the correct Password");
+		}
+		
+		
+});
+});
 
 </script>
+
+
+
+
 <link rel="stylesheet" type="text/css" href="startingPage.css">
 </head>
 <body>
-<h2><font color='green'>Non-ProdSystem</font></h2>
+<h2>Non-Production System</h2>
 
 <input type="submit" id="prod" value="Production"
-		onclick="location.href='http://localhost:8084/Dashboard/index.jsp'">
+		onclick="location.href='http://localhost:8088/Dashboard/index.jsp'">
 	<input type="submit" id="nonprod" value="Non-Production"
-		onclick="location.href='http://localhost:8084/Dashboard/parsingxmlNonProd.jsp'">
+		onclick="location.href='http://localhost:8088/Dashboard/parsingxmlNonProd.jsp'">
 
-  <table align="center" cellpadding="5" cellspacing="5" border="1"
+  <table class="table table-hover" align="center"
 		style="width: 100%; border-collapse: collapse;">
-  <tr bgcolor="#A52A2A">
+  <tr bgcolor="#b3b3b3">
 			<th>Host</th>
 			<th>SID</th>
 			<th>SCS</th>
@@ -51,14 +105,14 @@
   continue;
   NodeList NameDOBCity = emp.getChildNodes(); 
   %>
-  <tr bgcolor="#DEB887">
+  <tr bgcolor="#e6e6e6">
   <%
   for (int j=0; j<NameDOBCity.getLength(); j++ ){
   Node node = NameDOBCity.item(j);
   if ( isTextNode(node)) 
   continue;
   %>
-  <%if(!node.getFirstChild().getNodeValue().contains("www")){ %>
+  <%if(!node.getFirstChild().getNodeValue().contains("http")){ %>
   <td><%= node.getFirstChild().getNodeValue() %></td>
   <%} 
   else{
@@ -73,9 +127,11 @@
   }
   %>
   </table>
-  <form action="nonProdForm.jsp">
-  <input type="submit" value="Add" id="add">
-  </form>
- <input type="submit" id="Delete" value="Delete">
-</body>
+ <div align="center">
+		<form action="nonProdForms.jsp">
+			<input type="submit" value="Add" id="add" class="btn btn-default">
+		</form>
+		<input type="submit" id="Delete" value="Delete"
+			class="btn btn-default">
+	</div>
 </html>

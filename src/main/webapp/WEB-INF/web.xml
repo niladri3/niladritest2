@@ -28,6 +28,18 @@
   	<description></description>
   	<servlet-class>com.process.TestHello</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>deleteProd</servlet-name>
+  	<display-name>deleteProd</display-name>
+  	<description></description>
+  	<servlet-class>com.process.deleteProd</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>deleteNonProd</servlet-name>
+  	<display-name>deleteNonProd</display-name>
+  	<description></description>
+  	<servlet-class>com.process.deleteNonProd</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Updating</servlet-name>
   	<url-pattern>/Updating</url-pattern>
@@ -43,5 +55,13 @@
   <servlet-mapping>
   	<servlet-name>TestHello</servlet-name>
   	<url-pattern>/TestHello</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>deleteProd</servlet-name>
+  	<url-pattern>/deleteProd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>deleteNonProd</servlet-name>
+  	<url-pattern>/deleteNonProd</url-pattern>
   </servlet-mapping>
 </web-app>

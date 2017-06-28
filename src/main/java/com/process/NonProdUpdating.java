@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URISyntaxException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,18 +21,16 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
-
 
 public class NonProdUpdating extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
 		PrintWriter out=response.getWriter();
 		System.out.println("Welcome");
 		
@@ -48,7 +47,8 @@ public class NonProdUpdating extends HttpServlet {
 			String uscomps=request.getParameter("uscomp");
 			//System.out.println(uhost+"Hello");
 			docBuilder = docFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse("F:\\JavaProgram\\Dashboard\\src\\main\\webapp\\nonProd.xml");
+			File input =new File( getServletContext().getResource("/nonProd.xml").toURI());
+			Document doc = docBuilder.parse(input);
 			//Node earth = doc.getFirstChild();//roseindia
 			//NamedNodeMap earthAttributes = earth.getAttributes();
 			//Attr galaxy = doc.createAttribute("galaxy");
@@ -124,9 +124,10 @@ public class NonProdUpdating extends HttpServlet {
 			DOMSource source = new DOMSource(doc);
 			
 			
-			File folder = new File("F:\\JavaProgram\\Dashboard\\src\\main\\webapp");
-			StreamResult result = new StreamResult(new File(folder, "nonProd.xml"));
-			
+			//File folder = new File("F:\\JavaProgram\\Dashboard\\src\\main\\webapp");
+			File folder=new File(getServletContext().getResource("/nonProd.xml").toURI());
+			//StreamResult result = new StreamResult(new File(folder, "roseindia.xml"));
+			StreamResult result = new StreamResult(folder);
 		    //File outputFile = new File("roseindia.xml");
 		    //StreamResult result1 = new StreamResult(outputFile );
 		    // creating output stream
@@ -145,15 +146,18 @@ public class NonProdUpdating extends HttpServlet {
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		response.sendRedirect("parsingxmlNonProd.jsp");
+		
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
-	
 
 }
